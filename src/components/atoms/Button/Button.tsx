@@ -18,7 +18,7 @@ const classes = {
   large: 'btn-lg',
   normal: '',
   small: 'btn-sm',
-  tiny: 'btn-xs',
+  tiny: 'btn-xs px-2',
 }
 
 export const Button = ({
@@ -33,7 +33,7 @@ export const Button = ({
 }: ButtonProps) => (
   <button
     className={cn(
-      'btn px-6 normal-case',
+      'btn flex items-center px-6 normal-case',
       classes[variant],
       classes[color],
       classes[size],
