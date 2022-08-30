@@ -1,19 +1,22 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
+import Link from 'next/link'
+
+import { Button } from '../components/atoms'
 
 const Home: NextPage = () => {
   return (
-    <div className='p-16'>
-      <Head>
-        <title>Applicant Tracking System</title>
-        <meta name='description' content='A simple app for tracking applications of candidates' />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-
-      <main className='flex flex-col items-center'>
-        <h1 className='text-2xl'>Welcome to WATS!</h1>
-      </main>
-    </div>
+    <main className='flex h-full flex-col items-center justify-center'>
+      <h1 className='text-5xl'>Welcome to WATS!</h1>
+      <div className='mt-20'>
+        <Link href='/board'>
+          <a>
+            <Button size='large' variant='contained'>
+              Go to dashboard
+            </Button>
+          </a>
+        </Link>
+      </div>
+    </main>
   )
 }
 
