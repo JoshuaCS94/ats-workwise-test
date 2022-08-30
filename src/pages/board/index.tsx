@@ -31,33 +31,39 @@ const BoardPage: NextPage = () => {
     <main className='flex h-full flex-col'>
       <h1 className='text-5xl'>My board</h1>
       <div className='mt-8 flex grow items-stretch gap-4'>
-        {columns?.map((c, i) => (
-          <div key={c.id} className='h-full w-60 overflow-y-auto rounded bg-gray-300 p-2'>
-            <div className='sticky top-0 rounded border-2 border-black bg-white px-2 py-1 font-bold'>
-              {c.name}
-            </div>
-            <div className='mt-4 flex h-0 flex-col gap-2'>
-              {tickets
-                ?.filter(t => t.columnId === c.id)
-                .map(t => {
-                  const assignee = users.find(u => u.id === t.assigneeId)
+        {columns?.map((c, i) => {
+          const columnTickets = tickets?.filter(t => t.columnId === c.id)
 
-                  return (
-                    <Ticket
-                      key={t.id}
-                      title={t.title}
-                      description={t.description}
-                      assignee={assignee?.name}
-                      onMoveBack={i > 0 ? () => handleMoveTicketBack(t) : undefined}
-                      onMoveNext={
-                        i < columns.length - 1 ? () => handleMoveTicketNext(t) : undefined
-                      }
-                    />
-                  )
-                })}
+          return (
+            <div key={c.id} className='h-full w-60 overflow-y-auto rounded bg-gray-300 p-2'>
+              <div className='sticky top-0 rounded border-2 border-black bg-white px-2 py-1 font-bold'>
+                {c.name}
+              </div>
+              <div className='mt-4 flex h-0 flex-col gap-2'>
+                {columnTickets.length > 0 ? (
+                  columnTickets.map(t => {
+                    const assignee = users.find(u => u.id === t.assigneeId)
+
+                    return (
+                      <Ticket
+                        key={t.id}
+                        title={t.title}
+                        description={t.description}
+                        assignee={assignee?.name}
+                        onMoveBack={i > 0 ? () => handleMoveTicketBack(t) : undefined}
+                        onMoveNext={
+                          i < columns.length - 1 ? () => handleMoveTicketNext(t) : undefined
+                        }
+                      />
+                    )
+                  })
+                ) : (
+                  <p className='italic'>No tickets here. This column feels sad :(</p>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </main>
   )
