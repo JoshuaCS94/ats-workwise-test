@@ -1,7 +1,8 @@
 import { Base } from './Base'
 
 export interface Ticket extends Base {
-  text: string
-  assigneeId: number
+  title: string
+  description: string
+  assigneeId?: number
   columnId: number
 }
