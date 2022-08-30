@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { NextPage } from 'next'
 
 import { TEST_TICKETS, TEST_USERS, TEST_COLUMNS } from '../../mocks'
+import { Ticket } from '../../components/molecules'
 
 const BoardPage: NextPage = () => {
   const [tickets, setTickets] = useState(TEST_TICKETS)
@@ -24,15 +25,12 @@ const BoardPage: NextPage = () => {
                   const assignee = users.find(u => u.id === t.assigneeId)
 
                   return (
-                    <div key={t.id} className='rounded bg-white p-2'>
-                      <div className='font-semibold'>{t.title}</div>
-                      <div className='text-xs text-gray-700'>{t.description}</div>
-                      {assignee && (
-                        <div className='text-sm'>
-                          Assigned to: <span className='font-semibold'>{assignee.name}</span>
-                        </div>
-                      )}
-                    </div>
+                    <Ticket
+                      key={t.id}
+                      title={t.title}
+                      description={t.description}
+                      assignee={assignee?.name}
+                    />
                   )
                 })}
             </div>
